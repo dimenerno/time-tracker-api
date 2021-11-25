@@ -17,6 +17,10 @@ app.post('/', (req, res) => {
    res.send(req.body)
 })
 
+app.get('/', (req, res) => {
+   res.send({record_arr: reports})
+})
+
 app.listen(port, () => {
    console.log(`Example app listening at http://localhost:${port}`)
 })
