@@ -1,31 +1,34 @@
 const express = require('express')
 const cors = require("cors")
 const bodyParser = require('body-parser')
+const RecordModel = require('./model')
+const mongoose = require('mongoose')
+const db = require('./db')
 
 const app = express()
+***REMOVED***
+
+mongoose.connect('mongodb://localhost:27017', {
+***REMOVED***
+***REMOVED***
+***REMOVED***
+
+const database = mongoose.connection
+database.once('open', function () {
+   console.log('DB connected!')
 ***REMOVED***
 
 app.use(cors())
 app.use(bodyParser.urlencoded({ extended: false ***REMOVED***);
 app.use(bodyParser.json());
 
-const report = {
-   Study: 0,
-   Read: 0,
-   Work: 0,
-   Exercise: 0,
-   Leisure: 0
-}
-
 app.post('/', (req, res) => {
-   const json = req.body
-   report[json.category] += json.time
-   console.log(report)
-   res.send(report)
+   const new_json = req.body
+   db.update(new_json.category, new_json.time, () => res.send('ok'))
 ***REMOVED***
 
 app.get('/', (req, res) => {
-   res.send({report: report***REMOVED***
+   db.getToday(today_json => res.send(today_json))
 ***REMOVED***
 
 app.listen(port, () => {
