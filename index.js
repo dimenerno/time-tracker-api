@@ -9,16 +9,23 @@ app.use(cors())
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-const reports = []
+const report = {
+   Study: 0,
+   Read: 0,
+   Work: 0,
+   Exercise: 0,
+   Leisure: 0
+}
 
 app.post('/', (req, res) => {
-   reports.push(req.body)
-   console.log(reports)
-   res.send(req.body)
+   const json = req.body
+   report[json.category] += json.time
+   console.log(report)
+   res.send(report)
 })
 
 app.get('/', (req, res) => {
-   res.send({record_arr: reports})
+   res.send({report: report})
 })
 
 app.listen(port, () => {
