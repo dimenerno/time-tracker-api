@@ -1,14 +1,13 @@
 const express = require('express')
 const cors = require("cors")
 const bodyParser = require('body-parser')
-const RecordModel = require('./model')
 const mongoose = require('mongoose')
 const db = require('./db')
 
 const app = express()
 const port = 9000
 
-mongoose.connect('mongodb://localhost:27017', {
+mongoose.connect('mongodb://localhost:27017/time', {
    useNewUrlParser: true,
    useUnifiedTopology: true
 })
@@ -28,7 +27,8 @@ app.post('/', (req, res) => {
 })
 
 app.get('/', (req, res) => {
-   db.getToday(today_json => res.send(today_json))
+   const requestedDate = req.query.date
+   db.getDate(requestedDate, (categories, id) => res.send(categories))
 })
 
 app.listen(port, () => {
