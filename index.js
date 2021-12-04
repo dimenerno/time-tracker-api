@@ -5,20 +5,20 @@ const mongoose = require('mongoose')
 const db = require('./db')
 
 const app = express()
-***REMOVED***
+const port = 9000
 
-mongoose.connect('mongodb://localhost:27017/time', {
-***REMOVED***
-***REMOVED***
-***REMOVED***
+mongoose.connect('mongodb://root:Elaps577215!@ssal.sparcs.org:50000?authSource=admin', {
+   useNewUrlParser: true,
+   useUnifiedTopology: true
+})
 
 const database = mongoose.connection
 database.once('open', function () {
    console.log('DB connected!')
-***REMOVED***
+})
 
 app.use(cors())
-app.use(bodyParser.urlencoded({ extended: false ***REMOVED***);
+app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 app.post('/', (req, res) => {
@@ -28,7 +28,7 @@ app.post('/', (req, res) => {
    const new_json = req.body
 
    db.update(new_json.category, new_json.time, todayDay, todayMonth, todayYear, () => res.send('ok'))
-***REMOVED***
+})
 
 app.get('/', (req, res) => {
    const requestedDay = req.query.day
@@ -41,8 +41,8 @@ app.get('/', (req, res) => {
       db.getDataByMonth(requestedMonth, requestedYear, (categories) => res.send(categories))
    else
       db.getDataByYear(requestedYear, (categories) => res.send(categories))
-***REMOVED***
+})
 
 app.listen(port, () => {
    console.log(`Example app listening at http://localhost:${port}`)
-***REMOVED***
+})

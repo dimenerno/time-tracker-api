@@ -32,7 +32,7 @@ const schema = new mongoose.Schema({
    year: {
       type: String
    }
-***REMOVED***
+})
 
 const RecordModel = mongoose.model("record", schema)
 module.exports = RecordModel
