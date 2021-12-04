@@ -22,13 +22,23 @@ app.use(bodyParser.urlencoded({ extended: false ***REMOVED***);
 app.use(bodyParser.json());
 
 app.post('/', (req, res) => {
+   const todayDay = (new Date()).getDate();
+   const todayMonth = (new Date()).getMonth() + 1;
+   const todayYear = (new Date()).getFullYear();
    const new_json = req.body
-   db.update(new_json.category, new_json.time, () => res.send('ok'))
+
+   db.update(new_json.category, new_json.time, todayDay, todayMonth, todayYear, () => res.send('ok'))
 ***REMOVED***
 
 app.get('/', (req, res) => {
-   const requestedDate = req.query.date
-   db.getDate(requestedDate, (categories, id) => res.send(categories))
+   const requestedDay = req.query.day
+   const requestedMonth = req.query.month
+   const requestedYear = req.query.year
+
+   if(req.query.day)
+      db.getData(requestedDay, requestedMonth, requestedYear, (categories, id) => res.send(categories))
+   else if(req.query.month)
+      db.getDataByMonth(requestedMonth, requestedYear, (categories) => res.send(categories))
 ***REMOVED***
 
 app.listen(port, () => {

@@ -23,7 +23,13 @@ const schema = new mongoose.Schema({
          default: '0'
       }
    },
-   date: {
+   day: {
+      type: String
+   },
+   month: {
+      type: String
+   },
+   year: {
       type: String
    }
 ***REMOVED***
