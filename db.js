@@ -36,6 +36,26 @@ function getDataByMonth(month, year, callback) {
    ***REMOVED***
 }
 
+/** returns `id` and `categories` of today month */
+function getDataByYear(year, callback) {
+   RecordModel.find({ year: year }, (err, res) => {
+      var agg = {
+         'Study': '0',
+         'Read': '0',
+         'Work': '0',
+         'Exercise': '0',
+         'Leisure': '0'
+      }
+      res.forEach((item) => {
+         const item_json = item.toJSON()
+         for (var category in item_json.categories) {
+            agg[`${category}`] = (parseInt(agg[category]) + parseInt(item_json.categories[category])).toString()
+         }
+      ***REMOVED***
+      callback(agg)
+   ***REMOVED***
+}
+
 /** increment `category` for `delta` amount of time */
 function update(category, delta, day, month, year, callback) {
    getData(day, month, year, (categories, id) => {
@@ -49,5 +69,6 @@ function update(category, delta, day, month, year, callback) {
 module.exports = {
    getData,
    getDataByMonth,
+   getDataByYear,
    update
 }

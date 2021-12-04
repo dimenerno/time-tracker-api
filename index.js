@@ -39,6 +39,8 @@ app.get('/', (req, res) => {
       db.getData(requestedDay, requestedMonth, requestedYear, (categories, id) => res.send(categories))
    else if(req.query.month)
       db.getDataByMonth(requestedMonth, requestedYear, (categories) => res.send(categories))
+   else
+      db.getDataByYear(requestedYear, (categories) => res.send(categories))
 ***REMOVED***
 
 app.listen(port, () => {
