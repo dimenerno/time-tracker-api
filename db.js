@@ -6,14 +6,14 @@ const RecordModel = require('./model')
 function getData(day, month, year, callback) {
    RecordModel.find({$and: [{day: day}, {month: month}, {year: year}] }, (err, res) => {
       if (res.length === 0) {
-         const newItem = new RecordModel({day: day, month: month, year: year***REMOVED***
+         const newItem = new RecordModel({day: day, month: month, year: year})
          newItem.save((err, res) => {
             callback(newItem.categories, newItem._id)
-         ***REMOVED***
+         })
       } else {
          callback((res[0]).categories, (res[0])._id)
       }
-   ***REMOVED***
+   })
 }
 
 /** returns `id` and `categories` of today month */
@@ -31,9 +31,9 @@ function getDataByMonth(month, year, callback) {
          for (var category in item_json.categories) {
             agg[`${category}`] = (parseInt(agg[category]) + parseInt(item_json.categories[category])).toString()
          }
-      ***REMOVED***
+      })
       callback(agg)
-   ***REMOVED***
+   })
 }
 
 /** returns `id` and `categories` of today month */
@@ -51,9 +51,9 @@ function getDataByYear(year, callback) {
          for (var category in item_json.categories) {
             agg[`${category}`] = (parseInt(agg[category]) + parseInt(item_json.categories[category])).toString()
          }
-      ***REMOVED***
+      })
       callback(agg)
-   ***REMOVED***
+   })
 }
 
 /** increment `category` for `delta` amount of time */
@@ -62,7 +62,7 @@ function update(category, delta, day, month, year, callback) {
       var updateObj = {}
       updateObj[`categories.${category}`] = (parseInt(categories[category]) + delta).toString()
       RecordModel.updateOne({ _id: id }, {$set: updateObj}, () => callback())
-   ***REMOVED***
+   })
 }
 
 
