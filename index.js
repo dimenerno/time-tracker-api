@@ -3,7 +3,7 @@ const cors = require("cors")
 const bodyParser = require('body-parser')
 const mongoose = require('mongoose')
 const db = require('./db')
-const db_url = 'localhost:27017/time'
+const db_url = 'mongodb://localhost:27017/time'
 const app = express()
 const port = 9000
 
