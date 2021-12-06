@@ -3,14 +3,15 @@ const cors = require("cors")
 const bodyParser = require('body-parser')
 const mongoose = require('mongoose')
 const db = require('./db')
-
+const db_url = 'localhost:27017/time'
 const app = express()
 const port = 9000
 
-mongoose.connect('mongodb://localhost:27017/time', {
+mongoose.connect(db_url, {
    useNewUrlParser: true,
    useUnifiedTopology: true
 })
+
 
 const database = mongoose.connection
 database.once('open', function () {
