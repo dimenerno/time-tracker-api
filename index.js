@@ -12,7 +12,6 @@ mongoose.connect(db_url, {
    useUnifiedTopology: true
 })
 
-
 const database = mongoose.connection
 database.once('open', function () {
    console.log('DB connected!')
